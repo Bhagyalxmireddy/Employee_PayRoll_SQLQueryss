@@ -1,0 +1,2 @@
+create Database Employee_Payroll
+use Employee_Payroll
