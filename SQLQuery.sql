@@ -27,3 +27,18 @@ select * from Employee_Payroll WHERE Date BETWEEN CAST('2018-03-01' AS DATE) AND
 Alter Table Employee_Payroll ADD Gender varchar(10);
 UPDATE Employee_Payroll set Gender = 'F' WHERE Name = 'Sravani' or Name = 'Tejaswini';
 UPDATE Employee_Payroll set Gender = 'M' WHERE Name = 'Akshay';
+
+--UC7-Applying The Aggregation methods
+select SUM(Salary),Gender FROM Employee_Payroll  GROUP BY Gender;
+select SUM(Salary),Gender FROM Employee_Payroll WHERE Gender = 'F' GROUP BY Gender;
+
+select AVG(Salary),Gender FROM Employee_Payroll WHERE Gender = 'F' GROUP BY Gender;
+Select Name,Salary From Employee_Payroll WHERE Salary IN(select MIN(Salary) FROM Employee_Payroll);
+
+Select Name,Salary From Employee_Payroll WHERE Salary IN(select MAX(Salary) FROM Employee_Payroll);
+
+select COUNT(Name) From Employee_Payroll;
+
+
+
+
