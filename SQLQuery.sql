@@ -15,3 +15,4 @@ VALUES ('Tejaswini', '75000', '2018-05-27');
 INSERT INTO Employee_Payroll(Name, Salary,Date)
 VALUES ('Akshay', '100000', '2018-02-13');
 select * from Employee_Payroll;
+select * from Employee_Payroll WHERE Date BETWEEN CAST('2018-03-01' AS DATE) AND GETDATE();
