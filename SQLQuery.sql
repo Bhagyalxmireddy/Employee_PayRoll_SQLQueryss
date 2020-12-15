@@ -39,6 +39,19 @@ Select Name,Salary From Employee_Payroll WHERE Salary IN(select MAX(Salary) FROM
 
 select COUNT(Name) From Employee_Payroll;
 
+--UC8--Adding the columns to table
+ALTER TABLE Employee_Payroll ADD Phone_Number varchar(10) DEFAULT(2);
+ALTER TABLE Employee_Payroll DROP COLUMN Phone_Number;
+ALTER TABLE Employee_Payroll DROP CONSTRAINT [DF__Employee___Phone__47DBAE45];
 
+ALTER TABLE Employee_Payroll 
+ADD Phone_Number varchar(10),
+	Address varchar(10),
+	Department varchar(50);
 
+Update Employee_Payroll set Department = 'IT' WHERE Name = 'sravani' or Name = 'Tejaswini';
+Update Employee_Payroll set Department = 'EEE' WHERE Name = 'Akshay';
+
+Alter TABLE Employee_Payroll
+	Alter COLUMN Department varchar(50) NOT NULL;
 
