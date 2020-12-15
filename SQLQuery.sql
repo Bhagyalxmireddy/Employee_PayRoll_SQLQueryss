@@ -16,6 +16,13 @@ CREATE TABLE Department_Name (
 );
 select * from Department_Name;
 
+CREATE TABLE Employee_Department (
+    Dep_ID int,
+    ID int,
+	constraint Employee_Department_fk Foreign key(ID) references Employee(ID),   
+	constraint Employee_Department_fk1 Foreign key(Dep_ID) references Department_Name(Dep_ID), 
+);
+select * from Employee_Department;
 
 CREATE TABLE Payroll (
 	Payroll_ID int Identity(1,1) primary key,
@@ -41,6 +48,12 @@ Insert into Department_Name(Department_Name)
 	('customerService'),
 	('finace');
 
+Insert into Employee_Department(Dep_ID,ID)
+  values(1,1),
+		(2,1),
+		(3,2),
+		(4,3);
+select * from Employee_Department;
 
 
 Insert into Payroll(ID,StartDate,Basic_pay,Deduction,Taxable_Pay,Income_Tax,Netpay)
