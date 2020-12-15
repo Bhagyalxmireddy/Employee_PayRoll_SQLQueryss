@@ -2,64 +2,51 @@
 create Database Employee_Payroll
 use Employee_Payroll
 --UC2-Creating Table
-CREATE TABLE Employee_Payroll (
+CREATE TABLE Employee (
     ID int  IDENTITY(1,1) primary key,
     Name varchar(50),
-    Salary Float,
-    Date Date,   
+	Gender varchar(10),
+	PhoneNumber varchar(10),
+	address varchar(50),   
 );
-select * from Employee_Payroll;
---UC3-Inserting The values into Tables
-INSERT INTO Employee_Payroll(Name, Salary,Date)
-VALUES ('Sravani', '60000', '2019-11-13');
-INSERT INTO Employee_Payroll(Name, Salary,Date)
-VALUES ('Tejaswini', '75000', '2018-05-27');
-INSERT INTO Employee_Payroll(Name, Salary,Date)
-VALUES ('Akshay', '100000', '2018-02-13');
+select * from Employee;
+CREATE TABLE Department_Name (
+    Dep_ID int  IDENTITY(1,1) primary key,
+    Department_Name varchar(50),   
+);
+select * from Department_Name;
 
---UC4-Retriving The Values From Tables
-select * from Employee_Payroll;
 
---UC5-Retriving The Values from particular Row
-select * from Employee_Payroll WHERE Date BETWEEN CAST('2018-03-01' AS DATE) AND GETDATE();
+CREATE TABLE Payroll (
+	Payroll_ID int Identity(1,1) primary key,
+    ID int,
+	constraint Payroll_fk Foreign key(ID) references Employee(ID),  
+    StartDate varchar(50),
+	Basic_pay float(10),
+	Deduction float(10),
+	Taxable_Pay float(10),
+	Income_Tax float(10),
+	Netpay float(10),
+);
+select * from Payroll;
 
---UC6-ADDing The Column to Table
-Alter Table Employee_Payroll ADD Gender varchar(10);
-UPDATE Employee_Payroll set Gender = 'F' WHERE Name = 'Sravani' or Name = 'Tejaswini';
-UPDATE Employee_Payroll set Gender = 'M' WHERE Name = 'Akshay';
+Insert into Employee(Name,Gender,PhoneNumber,address)
+	values('sravani','F','8741025369','vijayawada'),
+		('tejaswini','F','9874102563','Mumbai'),
+		('Akshay','M','7801092129','Balnagar');
 
---UC7-Applying The Aggregation methods
-select SUM(Salary),Gender FROM Employee_Payroll  GROUP BY Gender;
-select SUM(Salary),Gender FROM Employee_Payroll WHERE Gender = 'F' GROUP BY Gender;
+Insert into Department_Name(Department_Name)
+	values('sales'),
+	('Marketing'),
+	('customerService'),
+	('finace');
 
-select AVG(Salary),Gender FROM Employee_Payroll WHERE Gender = 'F' GROUP BY Gender;
-Select Name,Salary From Employee_Payroll WHERE Salary IN(select MIN(Salary) FROM Employee_Payroll);
 
-Select Name,Salary From Employee_Payroll WHERE Salary IN(select MAX(Salary) FROM Employee_Payroll);
 
-select COUNT(Name) From Employee_Payroll;
-
---UC8--Adding the columns to table
-ALTER TABLE Employee_Payroll ADD Phone_Number varchar(10) DEFAULT(2);
-ALTER TABLE Employee_Payroll DROP COLUMN Phone_Number;
-ALTER TABLE Employee_Payroll DROP CONSTRAINT [DF__Employee___Phone__47DBAE45];
-
-ALTER TABLE Employee_Payroll 
-ADD Phone_Number varchar(10),
-	Address varchar(10),
-	Department varchar(50);
-
-Update Employee_Payroll set Department = 'IT' WHERE Name = 'sravani' or Name = 'Tejaswini';
-Update Employee_Payroll set Department = 'EEE' WHERE Name = 'Akshay';
-
-Alter TABLE Employee_Payroll
-	Alter COLUMN Department varchar(50) NOT NULL;
-
---UC9--Extending the columns to store more data in the tableEXEC sp_rename 'Employee_Payroll.Salary', 'Basic_Pay', 'COLUMN';
-ALTER TABLE Employee_Payroll 
-ADD Deductions float(20),
-	Taxable_Pay float(20),
-	Income_Pay float(20),
-	NetPay float(20);
-select * from Employee_Payroll;
-
+Insert into Payroll(ID,StartDate,Basic_pay,Deduction,Taxable_Pay,Income_Tax,Netpay)
+values(1,'2017-05-12',100000,20000,5000,2000,850000),
+	(2,'2018-07-25',60000,10000,2000,1000,50000),
+	(3,'2020-11-13',90000,9000,1000,1000,70000);
+select * from Payroll;
+drop Table Employee_Payroll;
+drop Table Payroll_Service;
