@@ -63,3 +63,28 @@ values(1,'2017-05-12',100000,20000,5000,2000,850000),
 select * from Payroll;
 drop Table Employee_Payroll;
 drop Table Payroll_Service;
+
+--UC4-Retreving data 
+select * from Employee;
+select * from Department_Name;
+select * from Employee_Department;
+select * from Payroll;
+
+--UC5--Retrevi The salary 
+select Basic_Pay from Payroll WHERE ID IN (select ID from Employee Where Name = 'Sravani');
+
+select * from Payroll Where StartDate = '2020-11-13';
+
+select Gender,Avg(payroll.Basic_pay) as AVG_Pay from PayRoll payroll 
+inner join Employee emp
+on payroll.ID = emp.ID
+group by Gender;
+
+select Gender,SUM(payroll.Basic_pay) as Total_Pay from PayRoll payroll 
+inner join Employee emp
+on payroll.ID = emp.ID
+group by Gender;
+
+select MIN(Basic_Pay) from Payroll;
+select Max(Basic_Pay) from Payroll;
+select Count(Basic_Pay) from Payroll;
