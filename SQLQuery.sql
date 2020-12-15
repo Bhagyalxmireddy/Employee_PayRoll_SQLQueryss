@@ -55,3 +55,11 @@ Update Employee_Payroll set Department = 'EEE' WHERE Name = 'Akshay';
 Alter TABLE Employee_Payroll
 	Alter COLUMN Department varchar(50) NOT NULL;
 
+--UC9--Extending the columns to store more data in the tableEXEC sp_rename 'Employee_Payroll.Salary', 'Basic_Pay', 'COLUMN';
+ALTER TABLE Employee_Payroll 
+ADD Deductions float(20),
+	Taxable_Pay float(20),
+	Income_Pay float(20),
+	NetPay float(20);
+select * from Employee_Payroll;
+
